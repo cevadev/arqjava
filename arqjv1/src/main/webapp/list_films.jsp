@@ -17,12 +17,14 @@
         String category_film_query =  "SELECT category_id, name FROM category";
         try{
           ResultSet rsCategoriesFilm = DatabaseHelper.executeQuery(category_film_query);
+          out.print("<h2>Filter films by Category: </h2>");
           out.println("<select name='category'>");
           while(rsCategoriesFilm.next()){
             String categoriesFilm = rsCategoriesFilm.getString("name");
             out.println("<option>" + categoriesFilm + "</option>");
           }
-          out.println("</select>");
+          out.println("</select><br/>");
+          out.println("<br />");
         }
         catch(Exception ex){
           StringWriter sw = new StringWriter();
@@ -34,8 +36,6 @@
         String query = "SELECT title, description, release_year FROM  film";
         try{
           ResultSet resultSet = DatabaseHelper.executeQuery(query);
-          out.println("<h2>List of Films</h2><br />");
-          out.println("<br />");
           out.println("<table border='1'>");
           out.println("<tr><th>Title</th><th>Description</th><th>Release Year</th></tr>");
           while(resultSet.next()){
