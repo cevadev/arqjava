@@ -28,6 +28,9 @@ public class DatabaseHelper {
   private static HikariConfig config = new HikariConfig();
   private static HikariDataSource ds;
 
+//  private static Connection connection = null;
+//  private static PreparedStatement preparedStatement = null;
+//  private static ResultSet resultSet = null;
   // preparacion de Hakari Datasource
   static {
     try {
@@ -57,7 +60,6 @@ public class DatabaseHelper {
   public static int executeUpdate(String sql, Object... parameters) {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
-
     try {
       connection = getConnection();
       preparedStatement = connection.prepareStatement(sql);
@@ -71,7 +73,8 @@ public class DatabaseHelper {
     } catch (SQLException ex) {
       ex.printStackTrace();
       return -1;
-    } finally {
+    }
+    finally {
       close(connection, preparedStatement, null);
     }
   }
@@ -88,13 +91,11 @@ public class DatabaseHelper {
         preparedStatement.setObject(i + 1, parameters[i]);
       }
       // run query
-      return preparedStatement.executeQuery();
-    }
-    catch (SQLException ex) {
+      ResultSet rs = preparedStatement.executeQuery();
+      return rs;
+    } catch (SQLException ex) {
       ex.printStackTrace();
       return null;
-    } finally {
-      close(connection, preparedStatement, null);
     }
   }
 
