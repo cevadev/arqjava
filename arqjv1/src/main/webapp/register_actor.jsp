@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="com.ceva.arqjv1.helpers.DatabaseHelper, java.sql.*, java.text.SimpleDateFormat, java.util.Date, java.io.StringWriter, java.io.PrintWriter"%>
+<%@ page import="com.ceva.arqjv1.helpers.ActorActiveRecord, com.ceva.arqjv1.helpers.DatabaseHelper, java.sql.*, java.text.SimpleDateFormat, java.util.Date, java.io.StringWriter, java.io.PrintWriter"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,8 +25,9 @@
 	
 	Timestamp last_update = new Timestamp(date.getTime());
         
-        String query = "INSERT INTO actor (first_name, last_name, last_update) VALUES(?,?,?)";
-        DatabaseHelper.executeUpdate(query, first_name, last_name, last_update);
+//        String query = "INSERT INTO actor (first_name, last_name, last_update) VALUES(?,?,?)";
+//        DatabaseHelper.executeUpdate(query, first_name, last_name, last_update);
+        ActorActiveRecord.add(first_name, last_name, last_update);
         response.sendRedirect("list_actors.jsp");
 	
 %>
