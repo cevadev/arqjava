@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="com.ceva.arqjv1.helpers.DatabaseHelper, java.io.StringWriter, java.io.PrintWriter, java.sql.*, java.text.SimpleDateFormat, java.util.Date"%>
+<%@ page import="com.ceva.arqjv1.records.Actor, com.ceva.arqjv1.dao.ActorDAOImpl, java.util.Set, java.io.StringWriter, java.io.PrintWriter, java.sql.*, java.text.SimpleDateFormat, java.util.Date"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -19,7 +19,8 @@
       String query = "SELECT * FROM actor";
       
       try{
-        ResultSet resultSet = DatabaseHelper.executeQuery(query);
+        // ResultSet resultSet = DatabaseHelper.executeQuery(query);
+        Set<Actor> actors = ActorDAOImpl.findAll();
         out.println("<h2>List of Actors</h2>");
         out.println("<a href=\"new_actor.jsp\">Add new actor</a><br />");
         out.println("<br />");
@@ -40,7 +41,7 @@
         out.println("</table>");
         
         // close connection
-        DatabaseHelper.close(null, null, resultSet);
+        // DatabaseHelper.close(null, null, resultSet);
       }
       catch(Exception ex){
         StringWriter sw = new StringWriter();
