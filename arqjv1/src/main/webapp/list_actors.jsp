@@ -39,9 +39,6 @@
           out.println("<tr><td>"+ first_name + "</td><td>" + last_name + "</td><td>" + last_update + "</td></tr>");
         }
         out.println("</table>");
-        
-        // close connection
-        // DatabaseHelper.close(null, null, resultSet);
       }
       catch(Exception ex){
         StringWriter sw = new StringWriter();
