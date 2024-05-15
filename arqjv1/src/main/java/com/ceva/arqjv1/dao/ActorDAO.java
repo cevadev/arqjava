@@ -12,7 +12,7 @@ import java.util.Set;
  * @author Test
  */
 public interface ActorDAO {
-  public static final String FIND_ALL ="SELECT actor_id, first_name, last_name FROM actor";
+  public static final String FIND_ALL ="SELECT actor_id, first_name, last_name, last_update FROM actor";
   public static final String FIND_BY_ID = "SELECT actor_id, first_name, last_name WHERE actor_id=?";
   public static final String CONCAT_NAME_BY_ID = "SELECT CONCAT(first_name, ' ', last_name) FROM actor WHERE actor_id=?";
   
