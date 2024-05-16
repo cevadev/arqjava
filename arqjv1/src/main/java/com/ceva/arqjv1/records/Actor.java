@@ -4,6 +4,7 @@
  */
 package com.ceva.arqjv1.records;
 
+import com.ceva.arqjv1.summaries.FilmSummary;
 import java.time.Instant;
 import java.util.Set;
 
@@ -15,6 +16,6 @@ public record Actor(
         Integer actor_id,
         String first_name,
         String last_name,
-        Set<Film> films,
+        Set<FilmSummary> films,
         Instant last_update){
 }

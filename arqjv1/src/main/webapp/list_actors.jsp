@@ -20,7 +20,6 @@
       
       try{
         final ActorDAO actorDao = new ActorDAOImpl();
-        // ResultSet resultSet = DatabaseHelper.executeQuery(query);
         Set<Actor> actors = actorDao.findAll();
         out.println("<h2>List of Actors</h2>");
         out.println("<a href=\"new_actor.jsp\">Add new actor</a><br />");
