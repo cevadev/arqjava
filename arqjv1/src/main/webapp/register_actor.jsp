@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="com.ceva.arqjv1.helpers.ActorActiveRecord, com.ceva.arqjv1.helpers.DatabaseHelper, java.sql.*, java.text.SimpleDateFormat, java.util.Date, java.io.StringWriter, java.io.PrintWriter"%>
+<%@ page import="com.ceva.arqjv1.records.Actor, com.ceva.arqjv1.dao.ActorDAO, com.ceva.arqjv1.dao.ActorDAOImpl, com.ceva.arqjv1.summaries.FilmSummary, java.sql.*, java.time.Instant, java.text.SimpleDateFormat, java.util.Set, java.util.Date, java.io.StringWriter, java.io.PrintWriter"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,17 +17,12 @@
 	// obtenemos parametros del formulario actor_form.jsp
 	String first_name = request.getParameter("first_name");
 	String last_name = request.getParameter("last_name");
-	Timestamp ts = new Timestamp(System.currentTimeMillis());
-	
-	String formatPattern = "yyyy-MM-dd HH:mm:ss";
-        SimpleDateFormat sdf = new SimpleDateFormat(formatPattern);
-	Date date = sdf.parse(ts.toString());
-	
-	Timestamp last_update = new Timestamp(date.getTime());
+	Instant last_update = Instant.now();
         
-//        String query = "INSERT INTO actor (first_name, last_name, last_update) VALUES(?,?,?)";
-//        DatabaseHelper.executeUpdate(query, first_name, last_name, last_update);
-        ActorActiveRecord.add(first_name, last_name, last_update);
+        Actor actor = new Actor(null, first_name, last_name, Set.of(), last_update);
+        final ActorDAO actorDao = new ActorDAOImpl();
+        actor = actorDao.insert(actor);
+        
         response.sendRedirect("list_actors.jsp");
 	
 %>
